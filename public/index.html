@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"">
+    <title>Document</title>
+    <script src=" https://cdn.socket.io/4.8.1/socket.io.min.js"
+        integrity="sha384-mkQ3/7FUtcGyoppY6bz/PORYoGqOl7/aSUMn2ymDOJcapfS6PHqxhRTMh1RR0Q6+" crossorigin="anonymous">
+    </script>
+    <script src="joy.js"></script>
+    <style>
+        /* html, body {margin: 0; height: 100%; overflow: hidden} */
+        div {
+            -webkit-user-select: none;
+            /* Safari */
+            -moz-user-select: none;
+            /* Firefox */
+            -ms-user-select: none;
+            /* Internet Explorer/Edge */
+            user-select: none;
+            /* Standard syntax */
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <input type="radio" name="player" value="0" id="p1">Tank 1
+        <input type="radio" name="player" value="1" id="p2">Tank 2
+        <input type="text" name="name" id="name" placeholder="Change your tank name">
+        <button type="submit" id="send">send</button>
+    </div>
+    <div style="width:150px;height:150px;margin:50px;position:fixed;bottom:50px;left:260px; border: 2px solid black; border-radius: 10%; text-align: center; justify-content: center; display: flex; background-color: red; color: white;"
+        id="launch">
+        <div style="justify-self: center;margin: 0;position: absolute;top: 50%;-ms-transform: translateY(-50%);transform: translateY(-50%); font-size: 50px;">
+            <p>Shoot</p>
+        </div>
+    </div>
+
+    <div id="joy1Div" style="width:200px;height:200px;margin:50px;position:fixed;bottom:30px;left:500px;"></div>
+
+
+    <div id="joy2Div" style="width:200px;height:200px;margin:50px;position:fixed;bottom:30px;left:0px;"></div>
+
+
+    <script>
+        if ("ontouchstart" in document.documentElement) {
+            document.getElementById("launch").addEventListener("touchstart", () => {
+                socket.emit('send_to_cpp', { type: 2, p: Number(sticks.p) });
+            });
+
+        } else {
+            document.getElementById("launch").addEventListener("mousedown", () => {
+                socket.emit('send_to_cpp', { type: 2, p: Number(sticks.p) });
+            });
+        }
+
+
+        const radioButtons = document.querySelectorAll('input[type="radio"]');
+        document.getElementById("send").addEventListener("click", () => {
+            let n = document.getElementById("name").value;
+            socket.emit('send_to_cpp', { name: n, type: 1, p: Number(sticks.p) });
+        });
+   
+        radioButtons.forEach(radioButton => {
+            radioButton.addEventListener('change', function () {
+                if (this.checked) {
+                    sticks.p = Number(this.value);
+                    console.log(sticks.p);
+
+                }
+            });
+        });
+        const socket = io();
+        sticks = { p: 0, x: 0, y: 0, x2: 0, y2: 0, type: 0 };
+        var joy1Param = { "title": "joystick1" };
+        var Joy1 = new JoyStick('joy1Div', joy1Param, function (stickData) {
+            sticks.x = stickData.x / 100;
+            sticks.y = -stickData.y / 100;
+            send();
+        });
+
+
+
+
+
+
+
+        var joy2Param = { "title": "joystick2" };
+
+
+
+        var Joy2 = new JoyStick('joy2Div', joy2Param, function (stickData) {
+            sticks.x2 = stickData.x / 100;
+            sticks.y2 = -stickData.y / 100;
+            send();
+        });
+
+        function send() {
+            socket.emit('send_to_cpp', sticks);
+        }
+
+
+
+    </script>
+</body>
+
+</html>

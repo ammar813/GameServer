@@ -1,15 +1,11 @@
 const http = require('http');
 const { Server } = require('socket.io');
-const fs = require('fs');
+const exrpress = require('express');
 
-const server = http.createServer((req, res) => {
-    res.setHeader('Content-Type', 'text/html');
+const app = exrpress();
+app.use(exrpress.static('public'));
 
-    fs.readFile('index.html', (err, data) => {
-      res.statusCode = 200;
-      res.end(data); 
-    });
-});
+const server = http.createServer(app);
 const io = new Server(server); 
 
 io.on("connection", socket => {
@@ -24,7 +20,7 @@ io.on("connection", socket => {
 
 
 const PORT = process.env.PORT || 3000;
-server.listen(PORT, () => {
+app.listen(PORT, () => {
   console.log(`Server listening on port localhost:${PORT}`);
   console.log(`Press Ctrl + C to close the server`);
 
