@@ -6,7 +6,7 @@ const app = exrpress();
 app.use(exrpress.static('public'));
 
 const server = http.createServer(app);
-const io = new Server(server); 
+const io = new Server(server);
 
 io.on("connection", socket => {
   console.log("client connected");
@@ -20,7 +20,7 @@ io.on("connection", socket => {
 
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`Server listening on port localhost:${PORT}`);
   console.log(`Press Ctrl + C to close the server`);
 
