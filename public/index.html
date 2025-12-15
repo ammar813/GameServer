@@ -1,18 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#ffffff">
+
   <title>Ammar Alhamdi | Interactive CV</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/font-awesome.min.css">
   <style>
-    :root {
+    /* =====================
+       THEME VARIABLES
+    ====================== */
+
+    :root[data-theme="dark"] {
       --bg: #0f172a;
+      --bg-alt: #020617;
       --card: #111827;
+      --border: #1f2933;
       --text: #e5e7eb;
-      --muted: #9ca3af;
+      --text-muted: #9ca3af;
       --accent: #38bdf8;
+      --accent-soft: rgba(56, 189, 248, 0.15);
+
+
     }
+
+    :root[data-theme="light"] {
+      --bg: #f8fafc;
+      --bg-alt: #ffffff;
+      --card: #ffffff;
+      --border: #e5e7eb;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --accent: #0284c7;
+      --accent-soft: rgba(2, 132, 199, 0.12);
+    }
+
+    /* =====================
+       BASE STYLES
+    ====================== */
 
     * {
       box-sizing: border-box;
@@ -22,9 +49,10 @@
 
     body {
       font-family: 'Inter', sans-serif;
-      background: linear-gradient(180deg, #020617, #0f172a);
+      background: linear-gradient(180deg, var(--bg-alt), var(--bg));
       color: var(--text);
       line-height: 1.6;
+      transition: background 0.4s ease, color 0.4s ease;
     }
 
     a {
@@ -33,8 +61,9 @@
     }
 
     header {
-      padding: 3rem 1.5rem;
+      padding: 3rem 1.5rem 2rem;
       text-align: center;
+      position: relative;
     }
 
     header h1 {
@@ -44,24 +73,49 @@
 
     header p {
       margin-top: 0.5rem;
-      color: var(--muted);
+      color: var(--text-muted);
     }
+
+    /* =====================
+       THEME TOGGLE BUTTON
+    ====================== */
+
+    .theme-toggle {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      background: var(--card);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 0.5rem 0.9rem;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.05);
+    }
+
+    /* =====================
+       LAYOUT
+    ====================== */
 
     .container {
       max-width: 1100px;
       margin: auto;
       padding: 1.5rem;
       display: grid;
-      grid-template-columns: 1fr;
       gap: 2rem;
     }
 
     section {
-      background: rgba(17, 24, 39, 0.85);
-      backdrop-filter: blur(10px);
+      background: var(--card);
       border-radius: 1rem;
       padding: 2rem;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--border);
+      transition: background 0.4s ease, border 0.4s ease;
     }
 
     section h2 {
@@ -77,26 +131,20 @@
       gap: 1.5rem;
     }
 
-    .skill, .edu, .cert {
-      background: var(--card);
-      padding: 1rem;
-      border-radius: 0.75rem;
-      font-size: 0.95rem;
-    }
+    /* =====================
+       PROJECT CARDS
+    ====================== */
 
     .project {
-      background: var(--card);
+      background: var(--bg);
       border-radius: 1rem;
       overflow: hidden;
-      display: flex;
-      flex-direction: column;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
+      border: 1px solid var(--border);
     }
 
     .project:hover {
       transform: translateY(-6px);
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
     }
 
     .project img {
@@ -110,12 +158,11 @@
     }
 
     .project-content h3 {
-      font-size: 1.1rem;
       margin-bottom: 0.5rem;
     }
 
     .project-content p {
-      color: var(--muted);
+      color: var(--text-muted);
       font-size: 0.9rem;
     }
 
@@ -127,7 +174,7 @@
     }
 
     .tag {
-      background: rgba(56, 189, 248, 0.15);
+      background: var(--accent-soft);
       color: var(--accent);
       padding: 0.25rem 0.6rem;
       border-radius: 999px;
@@ -137,95 +184,58 @@
     footer {
       text-align: center;
       padding: 2rem 1rem;
-      color: var(--muted);
+      color: var(--text-muted);
       font-size: 0.85rem;
-    }
-
-    @media (min-width: 768px) {
-      header h1 {
-        font-size: 3rem;
-      }
     }
   </style>
 </head>
 <body>
 
   <header>
+    <button class="theme-toggle" onclick="toggleTheme()"><i class="fa fa-2x fa-sun-o " aria-hidden="true"></i></button>
     <h1>Ammar Rashed Alhamdi</h1>
     <p>Bachelor of Computer Science • Software & Systems Enthusiast</p>
-    <p>
-      📞 +966 055 083 8934 · ✉️ <a href="mailto:AmmarAlhamdi.813@gmail.com">AmmarAlhamdi.813@gmail.com</a>
-    </p>
+    <p><i class="fa fa-phone" aria-hidden="true"></i> +966 055 083 8934 | <i class="fa fa-envelope" aria-hidden="true"></i> <a href="mailto:AmmarAlhamdi.813@gmail.com">AmmarAlhamdi.813@gmail.com</a></p>
   </header>
 
   <main class="container">
 
     <section>
-      <h2>Education</h2>
-      <div class="edu">
-        <strong>Yanbu Industrial College</strong><br>
-        Bachelor of Computer Science (2021 – 2025)<br>
-        GPA: <strong>3.9 / 4.0</strong>
-      </div>
+      <h2>Education <i class="fa fa-graduation-cap" aria-hidden="true"></i></h2>
+      <p><strong>Yanbu Industrial College</strong><br>Bachelor of Computer Science (2021–2025)<br>GPA: <strong>3.9 / 4.0</strong></p>
     </section>
 
     <section>
-      <h2>Projects</h2>
+      
+      <h2>Projects</i></h2>
       <div class="grid">
-
         <div class="project">
-          <img src="https://via.placeholder.com/600x400?text=Smart+Attendance" alt="Smart Attendance System">
+          <img src="https://via.placeholder.com/600x400?text=Smart+Attendance" alt="Smart Attendance">
           <div class="project-content">
             <h3>Smart Attendance System</h3>
-            <p>
-              Automated attendance tracking system with secure user data handling and record management.
-              Designed with a focus on data integrity and information protection.
-            </p>
-            <div class="tags">
-              <span class="tag">Python</span>
-              <span class="tag">Data Management</span>
-              <span class="tag">Security</span>
-            </div>
+            <p>Automated attendance tracking with secure data handling and integrity-focused design.</p>
+            <div class="tags"><span class="tag">Python</span><span class="tag">Security</span></div>
           </div>
         </div>
-
-        <a href="/test">
-            <div class="project">
-                <img src="https://via.placeholder.com/600x400?text=Boat+Renting+App" alt="Boat Renting App">
-                <div class="project-content">
-                    <h3>Boat Renting App</h3>
-                    <p>
-                        Deployed and maintained a backend server on AWS EC2. Fixed configuration issues,
-                        optimized server responses, and ensured stable production operation.
-                    </p>
-                    <div class="tags">
-                        <span class="tag">Django</span>
-                        <span class="tag">Flutter</span>
-                        <span class="tag">AWS EC2</span>
-                    </div>
-                </div>
-            </div>
-        </a>
-        
-
         <div class="project">
-          <img src="https://via.placeholder.com/600x400?text=Warehouse+Monitoring" alt="Warehouse Monitoring System">
+          <img src="https://via.placeholder.com/600x400?text=Boat+Renting+App" alt="Boat Renting App">
+          <div class="project-content">
+            <h3>Boat Renting App</h3>
+            <p>Deployed and maintained a Django backend on Aws EC2 instsance with optimized configuration.</p>
+            <div class="tags"><span class="tag">Django</span><span class="tag">Flutter</span><span class="tag">Aws EC2</span></div>
+          </div>
+        </div>
+        <div class="project">
+          <img src="https://via.placeholder.com/600x400?text=Warehouse+Monitoring" alt="Warehouse Monitoring">
           <div class="project-content">
             <h3>Warehouse Monitoring System</h3>
-            <p>
-              Assisted in debugging and reviewing Arduino-based sensor data collection.
-              Ensured reliable data transmission and accurate system output.
-            </p>
-            <div class="tags">
-              <span class="tag">Arduino</span>
-              <span class="tag">C++</span>
-              <span class="tag">IoT</span>
-            </div>
+            <p>Debugged Arduino sensor data pipelines and improved reliability.</p>
+            <div class="tags"><span class="tag">Arduino</span><span class="tag">C++</span></div>
           </div>
         </div>
-
       </div>
     </section>
+
 
     <section>
       <h2>Skills</h2>
@@ -249,9 +259,43 @@
 
   </main>
 
-  <footer>
-    © 2025 Ammar Alhamdi · Interactive CV
-  </footer>
+  <footer></footer>
+
+  <script>
+    const html = document.documentElement;
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+
+    function toggleTheme() {
+      
+      const newTheme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+
+      if (newTheme === 'light') {
+        metaTheme.setAttribute('content', '#ffffff');
+      } else {
+        metaTheme.setAttribute('content', '#020617');
+      }
+    }
+
+    (function () {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {  
+        html.setAttribute('data-theme', savedTheme);
+      } else {
+        const theme = (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) ? 'light' : 'dark';
+        html.setAttribute('data-theme', theme);
+      }
+
+      if (html.getAttribute('data-theme') === 'light') {
+        metaTheme.setAttribute('content', '#ffffff');
+      } else {
+        metaTheme.setAttribute('content', '#020617');
+      }
+    })();
+
+   
+  </script>
 
 </body>
 </html>
