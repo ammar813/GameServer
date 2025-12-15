@@ -1,11 +1,257 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ammar Alhamdi | Interactive CV</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: #111827;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --accent: #38bdf8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(180deg, #020617, #0f172a);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    header {
+      padding: 3rem 1.5rem;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+    }
+
+    header p {
+      margin-top: 0.5rem;
+      color: var(--muted);
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 1.5rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    section {
+      background: rgba(17, 24, 39, 0.85);
+      backdrop-filter: blur(10px);
+      border-radius: 1rem;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    section h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      border-left: 4px solid var(--accent);
+      padding-left: 0.75rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .skill, .edu, .cert {
+      background: var(--card);
+      padding: 1rem;
+      border-radius: 0.75rem;
+      font-size: 0.95rem;
+    }
+
+    .project {
+      background: var(--card);
+      border-radius: 1rem;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .project:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .project img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .project-content {
+      padding: 1.25rem;
+    }
+
+    .project-content h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .project-content p {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .tags {
+      margin-top: 0.75rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .tag {
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--accent);
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    @media (min-width: 768px) {
+      header h1 {
+        font-size: 3rem;
+      }
+    }
+  </style>
 </head>
 <body>
-    <a href="/gamecontroller">click here</a>
+
+  <header>
+    <h1>Ammar Rashed Alhamdi</h1>
+    <p>Bachelor of Computer Science • Software & Systems Enthusiast</p>
+    <p>
+      📞 +966 055 083 8934 · ✉️ <a href="mailto:AmmarAlhamdi.813@gmail.com">AmmarAlhamdi.813@gmail.com</a>
+    </p>
+  </header>
+
+  <main class="container">
+
+    <section>
+      <h2>Education</h2>
+      <div class="edu">
+        <strong>Yanbu Industrial College</strong><br>
+        Bachelor of Computer Science (2021 – 2025)<br>
+        GPA: <strong>3.9 / 4.0</strong>
+      </div>
+    </section>
+
+    <section>
+      <h2>Projects</h2>
+      <div class="grid">
+
+        <div class="project">
+          <img src="https://via.placeholder.com/600x400?text=Smart+Attendance" alt="Smart Attendance System">
+          <div class="project-content">
+            <h3>Smart Attendance System</h3>
+            <p>
+              Automated attendance tracking system with secure user data handling and record management.
+              Designed with a focus on data integrity and information protection.
+            </p>
+            <div class="tags">
+              <span class="tag">Python</span>
+              <span class="tag">Data Management</span>
+              <span class="tag">Security</span>
+            </div>
+          </div>
+        </div>
+
+        <a href="/test">
+            <div class="project">
+                <img src="https://via.placeholder.com/600x400?text=Boat+Renting+App" alt="Boat Renting App">
+                <div class="project-content">
+                    <h3>Boat Renting App</h3>
+                    <p>
+                        Deployed and maintained a backend server on AWS EC2. Fixed configuration issues,
+                        optimized server responses, and ensured stable production operation.
+                    </p>
+                    <div class="tags">
+                        <span class="tag">Django</span>
+                        <span class="tag">Flutter</span>
+                        <span class="tag">AWS EC2</span>
+                    </div>
+                </div>
+            </div>
+        </a>
+        
+
+        <div class="project">
+          <img src="https://via.placeholder.com/600x400?text=Warehouse+Monitoring" alt="Warehouse Monitoring System">
+          <div class="project-content">
+            <h3>Warehouse Monitoring System</h3>
+            <p>
+              Assisted in debugging and reviewing Arduino-based sensor data collection.
+              Ensured reliable data transmission and accurate system output.
+            </p>
+            <div class="tags">
+              <span class="tag">Arduino</span>
+              <span class="tag">C++</span>
+              <span class="tag">IoT</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section>
+      <h2>Skills</h2>
+      <div class="grid">
+        <div class="skill"><strong>Languages</strong><br>Python, Java, C, C++, PHP, JavaScript, SQL</div>
+        <div class="skill"><strong>Web</strong><br>HTML, CSS, Backend Deployment</div>
+        <div class="skill"><strong>Tools</strong><br>Git, GitHub, Linux, Windows, AWS EC2</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Certificates & Achievements</h2>
+      <div class="grid">
+        <div class="cert">IBM Full Stack Software Developer</div>
+        <div class="cert">Generative AI for Beginners</div>
+        <div class="cert">Machine Learning for Beginners</div>
+        <div class="cert">Introduction to Neural Networks</div>
+        <div class="cert">🥉 3rd Place – English Writing Competition</div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    © 2025 Ammar Alhamdi · Interactive CV
+  </footer>
+
 </body>
 </html>
