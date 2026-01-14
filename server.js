@@ -1,6 +1,7 @@
 const http = require('http');
 const { Server } = require('socket.io');
 const exrpress = require('express');
+Counter = 0
 
 const app = exrpress();
 app.use(exrpress.static('public'));
@@ -18,7 +19,8 @@ io.on("connection", socket => {
 });
 
 app.get('/gsm', (req, res) => {
-  res.end('GSM Endpoint Reached');
+  Counter++;
+  res.end('GSM Endpoint Reached' + Counter);
 });
 
 const PORT = process.env.PORT || 3000;
