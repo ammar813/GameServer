@@ -17,7 +17,9 @@ io.on("connection", socket => {
     })
 });
 
-
+app.get('/gsm', (req, res) => {
+  res.end('GSM Endpoint Reached');
+});
 
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
